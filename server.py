@@ -79,8 +79,9 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
+    body = flask_post_json()
     if request.method == 'POST':
-        for key, value in flask_post_json().items():
+        for key, value in body.items():
             myWorld.update(entity, key, value)
             return jsonify(myWorld.get(entity))
     elif request.method == 'PUT':
